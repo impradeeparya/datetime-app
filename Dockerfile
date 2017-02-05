@@ -31,3 +31,5 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION
     tar zxf apache-tomcat-*.tar.gz && \
     rm apache-tomcat-*.tar.gz && \
     mv apache-tomcat* tomcat
+
+CMD ${CATALINA_HOME}/bin/catalina.sh run
