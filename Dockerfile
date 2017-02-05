@@ -32,4 +32,8 @@ RUN wget -q https://archive.apache.org/dist/tomcat/tomcat-${TOMCAT_MAJOR_VERSION
     rm apache-tomcat-*.tar.gz && \
     mv apache-tomcat* tomcat
 
+# Copy war to webapp folder of tomcat
+ADD target/datetime-app.war /tomcat/webapps
+
+# Starting server
 CMD ${CATALINA_HOME}/bin/catalina.sh run

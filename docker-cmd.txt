@@ -28,10 +28,17 @@
 	- Embedded war file to build into docker image.
 	  ADD <WAR_PATH> <TOMCAT_WEBAPP_PATH>
 
+	 - Example
+	   sudo docker run -it --rm -p 8080:8080 --name datetime-app impradeeparya/datetime-app:v1
+
 	- Externalize war file by mounting with docker tomcat path.
 	  docker run -it --rm -p 8080:8080 -v <WAR_PATH>:<CONTAINER_TOMCAT_PATH> --name <DEPLOYED_WAR_NAME> <IMAGE_NAME>
 
 	- Example
 	  sudo docker run -it --rm -p 8080:8080 -v /mnt/Xebia/datetime-app/target:/tomcat/webapps/ --name datetime-app impradeeparya/datetime-app:v1
 
-
+10.
+    - it   : interactive
+    - rm   : rm container after exit
+    - p    : port
+    - name : name of container
