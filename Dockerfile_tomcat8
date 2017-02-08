@@ -1,0 +1,10 @@
+# Pull base image
+From tomcat:8-jre8
+
+# Permission to tomcat folder
+RUN chmod 777 -R /usr/local/tomcat/
+
+# Copy to images tomcat path
+ADD datetime-app.war /usr/local/tomcat/webapps/
+
+# to run : docker run -it --rm -p 8080:8080 --name datetime-app webserver

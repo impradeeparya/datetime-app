@@ -42,3 +42,13 @@
     - rm   : rm container after exit
     - p    : port
     - name : name of container
+
+11. Tag image with repository name of docker hub
+	- docker tag <IMAGE_ID> <DOCKER_HUB_PATH>:<VERSION>
+	- Example
+		docker tag 278946fdfaea impradeeparya/datetime-webserver:v1
+
+12. Push image
+	-  docker push <IMAGE_NAME>:<VERSION>
+	- Example
+		docker push impradeeparya/datetime-webserver:v1
