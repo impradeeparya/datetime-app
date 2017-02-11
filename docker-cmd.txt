@@ -11,21 +11,38 @@
 4. Remove container
 	docker rm <CONTAINER_ID>
 
-5. Create image
-    Create docker file
+5. Create docker file
+    - save below commands in a file name **Dockerfile**(without any extension)
+
+    # Pull base image
+    FROM ubuntu:14.04
+    # Install java-8
+        RUN \
+         echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | debconf-set-selections && \
+         apt-get update && \
+         apt-get install -y software-properties-common && \
+         add-apt-repository -y ppa:webupd8team/java && \
+         apt-get update && \
+         apt-get install -y oracle-java8-installer && \
+         rm -rf /var/lib/apt/lists/* && \
+         rm -rf /var/cache/oracle-jdk8-installer
+
+    # Define commonly used JAVA_HOME variable
+    ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
+
 
 6. Build image
     docker build -t <IMAGE_NAME> . (this command will search Dockerfile in current folder to build image)
 
 7. Run container
 	docker run <IMAGE_ID>
-	docker run -it -d <IMAGE_ID> (attched valid tty and run in detached mode)
 
 8. Open container terminal
+    docker run -it -d <IMAGE_ID> (attched valid tty and run in detached mode)
 	docker attach <CONTAIER_ID>
 
 9. Deploy war
-	- Embedded war file to build into docker image.
+	- Expose war directory path to server deployment directory.
 	  ADD <WAR_PATH> <TOMCAT_WEBAPP_PATH>
 
 	 - Example
@@ -37,18 +54,18 @@
 	- Example
 	  sudo docker run -it --rm -p 8080:8080 -v /mnt/Xebia/datetime-app/target:/tomcat/webapps/ --name datetime-app impradeeparya/datetime-app:v1
 
-10.
+10. Option in command
     - it   : interactive
     - rm   : rm container after exit
     - p    : port
     - name : name of container
 
 11. Tag image with repository name of docker hub
-	- docker tag <IMAGE_ID> <DOCKER_HUB_PATH>:<VERSION>
+	- docker tag <IMAGE_ID> <DOCKER_HUB_USERNAME>/<IMAGE_NAME>:<VERSION>
 	- Example
 		docker tag 278946fdfaea impradeeparya/datetime-webserver:v1
 
 12. Push image
-	-  docker push <IMAGE_NAME>:<VERSION>
+	-  docker push <REPOSITORY_NAME>:<VERSION>
 	- Example
 		docker push impradeeparya/datetime-webserver:v1
